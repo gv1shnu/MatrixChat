@@ -2,18 +2,28 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <!-- Adding necessary stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
-
-        <!-- link rel="stylesheet" type="text/css" href="../stc/css/index.css"> -->
     </head>
 
     <body>
         <div class="container">
             <span class="box">
-                <h2>> </h2>
+                {% if messages %}
+                    <h3>My messages: </h3>
+                    {% for sender, message in messages %}
+                        <p>@{{ sender }}> {{ message }}</p>
+                    {% endfor %}
+                {% else %}
+                    <h3>No past messages</h3>
+                {% endif %}
+                <br>
+                <form action="/submit" method="post">
+                    <h2>{{ current_user }} ></h2>
+                    <input type="text" id="msg" name="msg" autofocus/>
+                    <button type="submit" class="_submit"></button>
+                </form>
             </span>
-        </div>        
+        </div>
     </body>
 </html>

@@ -1,13 +1,12 @@
-
-h2{
-    color: darkgreen;
-}
-
 body{
     background-color: black;
     color: green;    
     margin: 0;
     height: 100vh;
+}
+
+h2{
+    color: darkgreen;
 }
 
 .container {
@@ -18,27 +17,18 @@ body{
     padding: 0 50px 0 10px;
     border: none;
 }
-  
-.box h2 {
-    gap: 2px;
+
+.box input, .box h2{
+    display: inline-block;
 }
 
 input{
     border: none;
+    width: 80vw;
+    background-color: transparent;
+    border: 1px solid black;
+    caret-color: darkgreen;
+    opacity: 0.7;
+    font-size: 12pt;
+    color: green;
 }
-
-@keyframes cursor-blink {
-    0% {
-        opacity: 0;
-    }
-}
-
-.box h2::after {
-    content: "";
-    width: 5px;
-    height: 20px;
-    background: green;
-    display: inline-block;
-    animation: cursor-blink 1.5s steps(2) infinite;
-}
-

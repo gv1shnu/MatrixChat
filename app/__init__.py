@@ -8,6 +8,7 @@ from jinja2 import TemplateNotFound
 
 # Internal imports
 from app.rts.index import index_bp
+from app.act.submit import fetch_bp
 from app.config import Config, basedir
 from decl import ROUTES
 from utl.logger import Logger
@@ -34,9 +35,7 @@ def create_app(config_class=Config):
     def handle_error(error):
         # Get current path
         current_route: str = request.path
-        if current_route not in ROUTES:
-            logger.debug(f"Irrelevant error while fetching {current_route}: {error}")
-        else:
+        if current_route in ROUTES:
             logger.error(f"An error occurred while fetching {current_route} route: {error}")
         try:
             # Render a custom error template
@@ -50,5 +49,6 @@ def create_app(config_class=Config):
 
     # Registering blueprints with flask app
     app.register_blueprint(index_bp)
+    app.register_blueprint(fetch_bp)
 
     return app

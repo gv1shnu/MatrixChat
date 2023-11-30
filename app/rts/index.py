@@ -4,6 +4,8 @@ from jinja2 import TemplateNotFound
 
 # Internal imports
 from utl.logger import Logger
+from src.handler import handler
+from decl import CURRENT_USER
 
 index_bp = Blueprint('index', __name__)
 
@@ -14,9 +16,15 @@ logger = Logger()
 @index_bp.route('/')
 def index():
     try:
-        return render_template(
-            "index.html"
-        )
-    except TemplateNotFound:
-        logger.error(f"index.html was not found.")
-        abort(404)
+        messages = handler.get_all()
+        try:
+            return render_template(
+                "index.html",
+                messages=messages,
+                current_user=CURRENT_USER
+            )
+        except TemplateNotFound:
+            logger.error(f"index.html was not found.")
+            abort(404)
+    except Exception as e:
+        logger.info(f"{str(e)}")

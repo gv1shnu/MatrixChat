@@ -6,12 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Adding necessary stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
-
-        <!-- Adding relevant icon links -->
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='ico/apple-touch-icon.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='ico/favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='ico/favicon-16x16.png') }}">
-        <link rel="manifest" href="{{ url_for('static', filename='ico/site.webmanifest') }}">
     </head>
     <body>
         <!-- Nexus label denoting developer mode -->
@@ -23,7 +17,7 @@
             <h2>Oops! Something went wrong.</h2>
 
             <!-- Source of a funny GIF displaying to developer(myself) -->
-            <img src="{{ url_for('static', filename='img/fun/red-card.gif') }}" alt="Error GIF">
+            <img src="{{ url_for('static', filename='img/red-card.gif') }}" alt="Error GIF">
 
             <!-- Nexus container to display error message -->
             <div class="error-container">
