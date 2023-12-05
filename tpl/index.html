@@ -2,6 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Matrix Pulse</title>
         <!-- Adding necessary stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     </head>
@@ -19,9 +20,9 @@
                 {% endif %}
                 <br>
                 <form action="/submit" method="post">
-                    <h2>{{ current_user }} ></h2>
+                    <p>{{ current_user }}> </p>
                     <input type="text" id="msg" name="msg" autofocus/>
-                    <button type="submit" class="_submit"></button>
+                    <button type="submit"></button>
                 </form>
             </span>
         </div>

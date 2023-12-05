@@ -3,17 +3,31 @@
 import os
 
 # Third party libraries
-from flask import Flask, request, render_template, abort
+from flask import Flask, request, render_template, abort, redirect, url_for
+from flask_login import LoginManager
 from jinja2 import TemplateNotFound
 
 # Internal imports
 from app.rts.index import index_bp
+from app.rts.login import login_bp
 from app.act.submit import fetch_bp
 from app.config import Config, basedir
 from decl import ROUTES
+from src.user import User
 from utl.logger import Logger
 
+login_manager = LoginManager()
 logger = Logger()
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('login.unauth'))
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 
 # Function that creates flask application and binds with blueprints
@@ -49,6 +63,9 @@ def create_app(config_class=Config):
 
     # Registering blueprints with flask app
     app.register_blueprint(index_bp)
+    app.register_blueprint(login_bp)
     app.register_blueprint(fetch_bp)
+
+    login_manager.init_app(app)
 
     return app

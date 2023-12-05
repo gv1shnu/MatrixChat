@@ -1,0 +1,18 @@
+
+CREATE TABLE messages (
+    message_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    sender VARCHAR(255) NOT NULL,
+    receiver VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    unread TINYINT(1) NOT NULL
+);
+
+CREATE TABLE users(
+    user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    full_name VARCHAR(100),
+    id TEXT NOT NULL UNIQUE,
+    profile_pic TEXT NOT NULL,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
