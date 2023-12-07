@@ -1,5 +1,7 @@
+# Third party library
 from flask_login import UserMixin
 
+# Internal imports
 from src.handler import handler
 
 

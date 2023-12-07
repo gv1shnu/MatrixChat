@@ -12,6 +12,19 @@ class Handler:
     def __init__(self):
         self.conn = mysql.connector.connect(**DB_CONFIG)
         self.cursor = self.conn.cursor()
+        self.create_tables()
+
+    def create_tables(self):
+        try:
+            with open('./src/schema.sql', 'r') as sql_file:
+                sql_script = sql_file.read()
+                sql_statements = sql_script.split(';')
+                for statement in sql_statements:
+                    if statement.strip():
+                        self.cursor.execute(statement)
+                self.conn.commit()
+        except Exception as e:
+            logger.exception("Error: %s", str(e))
 
     def __del__(self):
         self.close_connection()
@@ -48,12 +61,12 @@ class Handler:
             return None
 
     def insert_user(self, user_data):
-        insert_query = "INSERT INTO users (id, full_name, email, profile_pic) VALUES (%s, %s, %s, %s)"
+        insert_query = "INSERT INTO users (u_id, full_name, email, profile_pic) VALUES (%s, %s, %s, %s)"
         self.cursor.execute(insert_query, user_data)
         self.conn.commit()
 
     def get_user(self, user_id):
-        res = "SELECT * FROM users WHERE id=%s"
+        res = "SELECT * FROM users WHERE u_id=%s"
         self.cursor.execute(res, (user_id,))
         user = self.cursor.fetchone()
         if user:

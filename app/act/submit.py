@@ -31,7 +31,7 @@ def submit():
     except Exception as e:
         logger.error(f"Error here: {e}")
 
-    recipient = session['CURRENT_RECIPIENT']
+    recipient = session.get('CURRENT_RECIPIENT')
 
     # processing
     if message.startswith('@'):
@@ -45,7 +45,7 @@ def submit():
         # Add instructions display functionality here
         pass
     else:
-        user = session['CURRENT_USER']
+        user = session.get('CURRENT_USER')
         if recipient is not None:
             if user is not None:
                 handler.insert(sender=user, receiver=recipient, message=message)

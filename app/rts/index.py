@@ -18,10 +18,10 @@ def index():
     try:
         user = session.get('CURRENT_USER')
         if not user:
-            email = current_user.email
+            # Weird shit going on here
+            email = current_user.name
             user = email.split('@')[0]
-            session['CURRENT_RECIPIENT'] = user
-            session['CURRENT_USER'] = user
+            session['CURRENT_RECIPIENT'] = session['CURRENT_USER'] = user
         messages = handler.get_all_messages_for(username=user)
         try:
             return render_template(
