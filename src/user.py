@@ -6,7 +6,13 @@ from src.handler import handler
 
 
 class User(UserMixin):
-    def __init__(self, id_, name, email, profile_pic):
+    def __init__(
+            self,
+            id_,
+            name,
+            email,
+            profile_pic
+    ):
         self.id = id_
         self.name = name
         self.email = email
@@ -25,5 +31,12 @@ class User(UserMixin):
         return user
 
     @staticmethod
-    def create(id_, name, email, profile_pic):
-        handler.insert_user((id_, name, email, profile_pic))
+    def create(
+            id_,
+            name,
+            email,
+            profile_pic
+    ):
+        handler.insert_user(
+            (id_, name, email, profile_pic)
+        )

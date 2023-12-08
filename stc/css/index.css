@@ -49,3 +49,28 @@ p {
 button {
     display: none;
 }
+
+.instructions-box {
+    position: absolute;
+    bottom: 50px;
+    right: 80px;
+    background-color: #000;
+    padding: 10px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+}
+
+.instructions-box h3 {
+    margin-top: 0;
+    color: #00ff00;
+}
+
+.instructions-box ul {
+    list-style: none;
+    padding: 0;
+    color: #00ff00;
+}
+
+.instructions-box li {
+    margin-bottom: 5px;
+}

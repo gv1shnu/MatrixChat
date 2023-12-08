@@ -5,6 +5,10 @@
         <title>Matrix Pulse</title>
         <!-- Adding necessary stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
 
     <body>
@@ -21,10 +25,22 @@
                 <br>
                 <form action="/submit" method="post">
                     <p>{{ current_user }}> </p>
-                    <input type="text" id="msg" name="msg" autofocus/>
+                    <input type="text" id="msg" name="msg" autofocus autocomplete="off"/>
                     <button type="submit"></button>
                 </form>
             </span>
+            <span class="instructions-box">
+                <h3>Available Commands:</h3>
+                <ul>
+                    <li><strong>help</strong> - Show available commands</li>
+                    <li><strong>logout</strong> - Logout</li>
+                    <li><strong>@username</strong> - Change recipient</li>
+                    <li><strong>to?</strong> - Show current recipient</li>
+                    <!-- Add more commands as needed -->
+                </ul>
+            </span>
         </div>
+
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     </body>
 </html>

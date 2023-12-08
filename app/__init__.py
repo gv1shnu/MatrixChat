@@ -3,7 +3,14 @@
 import os
 
 # Third party libraries
-from flask import Flask, request, render_template, abort, redirect, url_for
+from flask import (
+    Flask,
+    request,
+    render_template,
+    abort,
+    redirect,
+    url_for
+)
 from flask_login import LoginManager
 from jinja2 import TemplateNotFound
 
@@ -12,7 +19,7 @@ from app.rts.index import index_bp
 from app.rts.login import login_bp
 from app.act.submit import fetch_bp
 from app.config import Config, basedir
-from decl import ROUTES
+from decl import ROUTES, ERROR_TEMPLATE
 from src.user import User
 from utl.logger import Logger
 
@@ -50,15 +57,20 @@ def create_app(config_class=Config):
         # Get current path
         current_route: str = request.path
         if current_route in ROUTES:
-            logger.error(f"An error occurred while fetching {current_route} route: {error}")
+            logger.error(
+                f"An error occurred while "
+                f"fetching {current_route} route: {error}"
+            )
         try:
             # Render a custom error template
             return render_template(
-                "error.html",
+                ERROR_TEMPLATE,
                 error_message=str(error)
             )
         except TemplateNotFound:
-            logger.error(f"error.html was not found.")
+            logger.error(
+                f"{ERROR_TEMPLATE} was not found."
+            )
             abort(404)
 
     # Registering blueprints with flask app

@@ -9,7 +9,8 @@ ROUTES: List[str] = [
     "/submit",
     "/login",
     "/login/callback"
-    "/logout"
+    "/logout",
+    "/get_users"
 ]
 
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
@@ -25,3 +26,7 @@ DB_CONFIG: dict = {
     "password": os.environ.get('matrixPassword'),
     "database": os.environ.get('matrixDb')
 }
+
+INDEX_TEMPLATE = "index.html"
+LOGIN_TEMPLATE = "login.html"
+ERROR_TEMPLATE = "error.html"

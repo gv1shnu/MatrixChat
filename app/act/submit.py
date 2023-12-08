@@ -1,6 +1,10 @@
 # Third-party libraries
 from flask import (
-    Blueprint, request, redirect, url_for, session
+    Blueprint,
+    request,
+    redirect,
+    url_for,
+    session
 )
 from flask_login import login_required
 
@@ -20,7 +24,8 @@ def validate(message: str):
 
 # submit route of the fetch blueprint
 @fetch_bp.route(
-    '/submit', methods=['POST']
+    '/submit',
+    methods=['POST']
 )
 @login_required
 def submit():
@@ -48,7 +53,11 @@ def submit():
         user = session.get('CURRENT_USER')
         if recipient is not None:
             if user is not None:
-                handler.insert(sender=user, receiver=recipient, message=message)
+                handler.insert(
+                    sender=user,
+                    receiver=recipient,
+                    message=message
+                )
             else:
                 logger.error("Invalid Sender")
         else:

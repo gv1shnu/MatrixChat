@@ -1,9 +1,22 @@
 # Third-party libraries
-from flask import Blueprint, redirect, url_for, request, render_template, abort, session
-from flask_login import login_user, login_required, logout_user
+from flask import (
+    Blueprint,
+    redirect,
+    url_for,
+    request,
+    render_template,
+    abort,
+    session
+)
+from flask_login import (
+    login_user,
+    login_required,
+    logout_user
+)
 from jinja2 import TemplateNotFound
 
 # Internal imports
+from decl import LOGIN_TEMPLATE
 from utl.logger import Logger
 from utl.auth import google_callback, login_user_with_google
 from src.user import User
@@ -16,10 +29,12 @@ logger = Logger()
 def unauth():
     try:
         return render_template(
-            "login.html"
+            LOGIN_TEMPLATE
         )
     except TemplateNotFound:
-        logger.error(f"index.html was not found.")
+        logger.error(
+            f"{LOGIN_TEMPLATE} was not found."
+        )
         abort(404)
 
 
@@ -32,7 +47,8 @@ def auth():
 
 @login_bp.route("/login/callback")
 def callback():
-    # Call the callback function to handle Google's callback and user authentication
+    # Call the callback function to handle
+    # Google's callback and user authentication
     user: User = google_callback(request)
     login_user(user)
     return redirect(
@@ -45,4 +61,6 @@ def callback():
 def logout():
     session.clear()
     logout_user()
-    return redirect(url_for("index.index"))
+    return redirect(
+        url_for("index.index")
+    )
