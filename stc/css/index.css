@@ -65,12 +65,17 @@ button {
     color: #00ff00;
 }
 
-.instructions-box ul {
+.instructions-box table {
     list-style: none;
     padding: 0;
     color: #00ff00;
 }
 
-.instructions-box li {
+.instructions-box tr {
     margin-bottom: 5px;
+}
+
+#messageList{
+    display: flex;
+    align-items: center;
 }

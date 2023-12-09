@@ -30,3 +30,10 @@ DB_CONFIG: dict = {
 INDEX_TEMPLATE = "index.html"
 LOGIN_TEMPLATE = "login.html"
 ERROR_TEMPLATE = "error.html"
+
+INSTRUCTIONS = [
+    ("@username", "Change recipient"),
+    ("to?", "Show current recipient"),
+    ("logout", "Logout")
+]
+

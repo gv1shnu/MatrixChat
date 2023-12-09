@@ -11,17 +11,12 @@ from flask_login import current_user, login_required
 from jinja2 import TemplateNotFound
 
 # Internal imports
-from decl import INDEX_TEMPLATE
+from decl import INDEX_TEMPLATE, INSTRUCTIONS
 from utl.logger import Logger
-from src.handler import handler
+from src.handler import handler, USER_LIST
 
 index_bp = Blueprint('index', __name__)
 logger = Logger()
-
-user_list = [
-    user[0].split('@')[0]
-    for user in handler.get_all_users()
-]
 
 
 # Home route of the application
@@ -35,6 +30,8 @@ def index():
             email = current_user.name
             user = email.split('@')[0]
             session['CURRENT_RECIPIENT'] = session['CURRENT_USER'] = user
+
+        recipient = session.get('CURRENT_RECIPIENT')
         messages = handler.get_all_messages_for(
             username=user
         )
@@ -42,7 +39,9 @@ def index():
             return render_template(
                 INDEX_TEMPLATE,
                 messages=messages,
-                current_user=user
+                current_user=user,
+                current_recipient=recipient,
+                instructions=INSTRUCTIONS
             )
         except TemplateNotFound:
             logger.error(
@@ -63,7 +62,7 @@ def get_users():
     search_term = request.args.get('term', '')[1:]
     results = [
         "@" + word
-        for word in user_list
+        for word in USER_LIST
         if search_term.lower() in word.lower()
     ]
     return jsonify(results)

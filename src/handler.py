@@ -122,3 +122,9 @@ class Handler:
 
 # Usage
 handler = Handler()
+
+
+USER_LIST = [
+    user[0].split('@')[0]
+    for user in handler.get_all_users()
+]

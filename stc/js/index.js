@@ -28,3 +28,32 @@ document.addEventListener('click', function(event) {
     textInput.focus();
   }
 });
+
+function saveMessage() {
+    var inputMessage = document.getElementById('msg').value;
+    if (inputMessage === "logout") {
+        localStorage.clear();
+    }
+    else if(inputMessage === "to?") {
+        alert("Current recipient is: "+ currentRecipient);
+    }
+    else {
+        var messages = JSON.parse(localStorage.getItem('storedMessages')) || [];
+        messages.push(inputMessage);
+        localStorage.setItem('storedMessages', JSON.stringify(messages));
+        displayMessages();
+    }
+}
+
+function displayMessages() {
+    var messages = JSON.parse(localStorage.getItem('storedMessages')) || [];
+    var messageListDiv = document.getElementById('messageList');
+    messageListDiv.innerHTML = '<table>' + messages.map(
+        message => '<tr><td><p>'+
+        currentUser + '> </p></td><td><p>@'+
+         currentRecipient + '</p></td><td><p> '
+         + message + '</p></td></tr>'
+        ).join('') + '</table>';
+}
+
+displayMessages();

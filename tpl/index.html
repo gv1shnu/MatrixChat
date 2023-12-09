@@ -6,7 +6,7 @@
         <!-- Adding necessary stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+        <!-- Adding necessary scripts -->
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
@@ -23,24 +23,35 @@
                     <h3>No past messages</h3>
                 {% endif %}
                 <br>
+                <span id="messageList"></span>
+                <br>
                 <form action="/submit" method="post">
                     <p>{{ current_user }}> </p>
                     <input type="text" id="msg" name="msg" autofocus autocomplete="off"/>
-                    <button type="submit"></button>
+                    <button type="submit" onclick="saveMessage()"></button>
                 </form>
             </span>
             <span class="instructions-box">
-                <h3>Available Commands:</h3>
-                <ul>
-                    <li><strong>help</strong> - Show available commands</li>
-                    <li><strong>logout</strong> - Logout</li>
-                    <li><strong>@username</strong> - Change recipient</li>
-                    <li><strong>to?</strong> - Show current recipient</li>
-                    <!-- Add more commands as needed -->
-                </ul>
+                <h3>Available Commands</h3>
+                <table>
+                    {% for instruction in instructions %}
+                        <tr>
+                            <td>
+                                <strong>
+                                    {{ instruction[0] }}
+                                </strong>
+                            </td>
+                            <td>{{ instruction[1] }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </span>
         </div>
 
         <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+        <script>
+            var currentUser = "{{ current_user }}";
+            var currentRecipient = "{{ current_recipient }}";
+        </script>
     </body>
 </html>

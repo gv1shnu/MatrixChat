@@ -9,7 +9,7 @@ from flask import (
 from flask_login import login_required
 
 # Internal imports
-from src.handler import handler
+from src.handler import handler, USER_LIST
 from utl.logger import Logger
 
 fetch_bp = Blueprint('fetch', __name__)
@@ -41,14 +41,14 @@ def submit():
     # processing
     if message.startswith('@'):
         message = message.split(' ')[0]
-        session['CURRENT_RECIPIENT'] = message[1:]
+        if message in USER_LIST:
+            session['CURRENT_RECIPIENT'] = message[1:]
+        else:
+            logger.debug("Invalid Recipient")
     elif message == "logout":
         return redirect(url_for('login.logout'))
     elif message == "to?":
         logger.debug(f"To {recipient}")
-    elif message == "help":
-        # Add instructions display functionality here
-        pass
     else:
         user = session.get('CURRENT_USER')
         if recipient is not None:
