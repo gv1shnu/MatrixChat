@@ -41,13 +41,15 @@ def submit():
     # processing
     if message.startswith('@'):
         message = message.split(' ')[0]
-        if message in USER_LIST:
-            session['CURRENT_RECIPIENT'] = message[1:]
+        user_ = message[1:]
+        if user_ in USER_LIST:
+            session['CURRENT_RECIPIENT'] = user_
         else:
             logger.debug("Invalid Recipient")
     elif message == "logout":
         return redirect(url_for('login.logout'))
     elif message == "to?":
+        recipient = session['CURRENT_RECIPIENT']
         logger.debug(f"To {recipient}")
     else:
         user = session.get('CURRENT_USER')

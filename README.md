@@ -1,6 +1,6 @@
-# Matrix Pulse
+# Matrix Chat
 
-Matrix Pulse is a web application that allows users to chat with each others.
+Matrix Chat is a web application that allows users to chat with each others.
 
 ## Contributing
 
